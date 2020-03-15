@@ -96,5 +96,19 @@ public class Controller {
         Pageable p = PageRequest.of(page, count);
         return mr.findAllBy(p);
     }
+    @GetMapping("/users")
+    public Iterable<User> getUsers() {
+        Sort sort = Sort.by(Sort.Order.asc("name"));
+        return ur.findAll(sort);
+    }
+    @GetMapping("/userem/{email}")
+    public User getUserEmail(@PathVariable("email") String email) {
+        return ur.findByEmail(email);
+    }
+    @GetMapping("/username/{name}")
+    public User getUserName(@PathVariable("name") String name) {
+        return ur.findByName(name);
+    }
+
 
 }
