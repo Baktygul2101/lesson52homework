@@ -8,6 +8,9 @@ import kz.attractorschool.moviereviewrr.repository.MovieRepository;
 import kz.attractorschool.moviereviewrr.repository.ReviewRepository;
 import kz.attractorschool.moviereviewrr.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -75,6 +78,23 @@ public class Controller {
                                      @PathVariable("year") int year,
                                      @PathVariable("rating") int rating) {
         return mr.selectMovies(title, year, rating);
+    }
+    @GetMapping("/films")
+    public Page<Review> getReviewPage(){
+        Sort sortBy = Sort.by(Sort.Order.asc("stars"));
+        int page = 1;
+        int count = 3;
+        Pageable pageable = PageRequest.of(page, count,sortBy);
+        return rr.findAllBy(pageable);
+    }
+
+    @GetMapping("/filmpage")
+    public Page<Movie> getMoviePage(){
+        Sort sBy = Sort.by(Sort.Order.asc("title"),Sort.Order.asc("rating"));
+        int page = 1;
+        int count = 5;
+        Pageable p = PageRequest.of(page, count);
+        return mr.findAllBy(p);
     }
 
 }

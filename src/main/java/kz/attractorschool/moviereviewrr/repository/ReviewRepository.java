@@ -1,6 +1,9 @@
 package kz.attractorschool.moviereviewrr.repository;
 
 import kz.attractorschool.moviereviewrr.model.Review;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -12,4 +15,5 @@ public interface ReviewRepository extends CrudRepository<Review, String> {
     public List<Review> findAll(Sort sort);
     public List<Review> findByMovie_Id(String id);
     public List<Review> findByMovie_Directors(String id);
+    public Page<Review> findAllBy(Pageable pageable);
 }

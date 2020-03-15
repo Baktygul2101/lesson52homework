@@ -1,6 +1,9 @@
 package kz.attractorschool.moviereviewrr.repository;
 
 import kz.attractorschool.moviereviewrr.model.Movie;
+import kz.attractorschool.moviereviewrr.model.Review;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -28,4 +31,7 @@ public interface MovieRepository extends CrudRepository<Movie, String> {
 
     @Query("{'title': {'$regex' : '?0', '$options' : 'i' }, '$or': [{'releaseYear' : {'$gte' : ?1}}, {'rating' : {'$gte' : ?2}}]}")
     public List<Movie> selectMovies(String title, int year, int rating);
+
+
+    public Page<Movie> findAllBy(Pageable p);
 }
