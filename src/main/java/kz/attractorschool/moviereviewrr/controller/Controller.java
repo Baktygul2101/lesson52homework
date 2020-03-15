@@ -109,6 +109,9 @@ public class Controller {
     public User getUserName(@PathVariable("name") String name) {
         return ur.findByName(name);
     }
-
+    @GetMapping("/email/{email}")
+    public boolean isExist( String email) {
+        return ur.existsByEmail(email);
+    }
 
 }

@@ -10,4 +10,5 @@ public interface UserRepository extends CrudRepository<User, String> {
     public Iterable<User> findAll(Sort sort);
     public User findByEmail(String email);
     public User findByName(String name);
+    boolean existsByEmail(String email);
 }
