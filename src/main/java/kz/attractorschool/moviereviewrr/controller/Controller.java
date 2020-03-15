@@ -2,6 +2,8 @@ package kz.attractorschool.moviereviewrr.controller;
 
 import kz.attractorschool.moviereviewrr.MovieReviewrrApplication;
 import kz.attractorschool.moviereviewrr.model.Movie;
+import kz.attractorschool.moviereviewrr.model.Review;
+import kz.attractorschool.moviereviewrr.model.User;
 import kz.attractorschool.moviereviewrr.repository.MovieRepository;
 import kz.attractorschool.moviereviewrr.repository.ReviewRepository;
 import kz.attractorschool.moviereviewrr.repository.UserRepository;
@@ -45,4 +47,22 @@ public class Controller {
         Sort s = Sort.by(Sort.Order.asc("title"));
         return mr.getMoviesBetween(year, year2, s);
     }
+
+    @GetMapping("/reviews")
+    public List<Review> getReview() {
+        Sort sort = Sort.by(Sort.Order.asc("review"));
+        return rr.findAll(sort);
+    }
+
+    @GetMapping("/reviewbymovie/{title}")
+    public List<Review> getMovie(@PathVariable("title") String title) {
+        return rr.findByMovie_Id(mr.findByTitle(title).getId());
+    }
+    @GetMapping("/reviewbydirector/{directors}")
+    public List<Review> getMovieD(@PathVariable("directors") String directors) {
+        return rr.findByMovie_Directors(mr.findByDirectors(directors).getId());
+    }
+   
+
+
 }

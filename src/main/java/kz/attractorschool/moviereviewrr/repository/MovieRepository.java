@@ -17,4 +17,7 @@ public interface MovieRepository extends CrudRepository<Movie, String> {
 
     @Query("{'releaseYear' : { '$gte' : ?0, '$lte' : ?1 }}")
     public Iterable<Movie> getMoviesBetween(int year, int year2, Sort s);
+
+    public Movie findByTitle(String title);
+    public Movie findByDirectors(String directors);
 }
