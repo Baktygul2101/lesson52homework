@@ -3,6 +3,7 @@ package kz.attractorschool.moviereviewrr.model;
 import kz.attractorschool.moviereviewrr.util.Generator;
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,6 +15,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @AllArgsConstructor
+@CompoundIndex(def = "{'reviewer': 1, 'movie': 1}")
 public class Review {
 
     private static final Random r = new Random();

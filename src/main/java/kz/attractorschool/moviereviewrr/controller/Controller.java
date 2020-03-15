@@ -114,4 +114,12 @@ public class Controller {
         return ur.existsByEmail(email);
     }
 
+   /* @GetMapping("/reviewfromuser/{name}")
+    public List<Review> getUserReview(@PathVariable("name") String name,String title) {
+        return rr.findByReviewerAndMovie(ur.findByName(name),mr.findByTitle(title).getId());
+    }
+    @GetMapping("/rev/{name}")
+    public List<Review> getUserRev(@PathVariable("name") User name) {
+        return rr.findByReviewerAndId(name);
+    }*/
 }

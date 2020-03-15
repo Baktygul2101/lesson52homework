@@ -3,6 +3,7 @@ package kz.attractorschool.moviereviewrr.model;
 import kz.attractorschool.moviereviewrr.util.Generator;
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -19,6 +20,7 @@ import static java.util.stream.Collectors.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @AllArgsConstructor
+@CompoundIndex(def = "{'title': 1, 'directors': 1}")
 public class Movie {
 
     private static final Random r = new Random();
@@ -26,9 +28,10 @@ public class Movie {
     @Id
     @Builder.Default
     private String id = UUID.randomUUID().toString();
-
+    @Indexed
     private String title;
     private String poster;
+    @Indexed
     private int releaseYear;
 
     @Builder.Default
