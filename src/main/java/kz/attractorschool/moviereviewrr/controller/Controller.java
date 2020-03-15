@@ -24,7 +24,7 @@ public class Controller {
     @Autowired
     UserRepository ur;
 
-    @GetMapping("/movie")
+    @GetMapping("/movies")
     public Iterable<Movie> getMovie() {
         Sort s = Sort.by(Sort.Order.asc("title"));
         return mr.findAll(s);
@@ -62,7 +62,19 @@ public class Controller {
     public List<Review> getMovieD(@PathVariable("directors") String directors) {
         return rr.findByMovie_Directors(mr.findByDirectors(directors).getId());
     }
-   
-
+    @GetMapping("/movie/{title}")
+    public Movie getMovieOne(@PathVariable("title") String title) {
+        return mr.findByTitle(title);
+    }
+    @GetMapping("/movierating/{rating}")
+    public List<Movie> getMovie(@PathVariable("rating") double rating){
+        return mr.selectMoviesWithRating(rating);
+    }
+    @GetMapping("/film/{title}/{year}/{rating}")
+    public List<Movie> getMovieWhich(@PathVariable("title") String title,
+                                     @PathVariable("year") int year,
+                                     @PathVariable("rating") int rating) {
+        return mr.selectMovies(title, year, rating);
+    }
 
 }

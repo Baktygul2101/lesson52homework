@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface MovieRepository extends CrudRepository<Movie, String> {
 
@@ -20,4 +22,10 @@ public interface MovieRepository extends CrudRepository<Movie, String> {
 
     public Movie findByTitle(String title);
     public Movie findByDirectors(String directors);
+
+    @Query ("{'rating': ?0}")
+    public List<Movie> selectMoviesWithRating(double howManyStars);
+
+    @Query("{'title': {'$regex' : '?0', '$options' : 'i' }, '$or': [{'releaseYear' : {'$gte' : ?1}}, {'rating' : {'$gte' : ?2}}]}")
+    public List<Movie> selectMovies(String title, int year, int rating);
 }
