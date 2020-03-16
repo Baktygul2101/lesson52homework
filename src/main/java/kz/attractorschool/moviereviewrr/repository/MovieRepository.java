@@ -34,4 +34,10 @@ public interface MovieRepository extends CrudRepository<Movie, String> {
 
 
     public Page<Movie> findAllBy(Pageable p);
+
+    @Query("{'actors': {'$regex' : '?0' , '$options' : 'i'}}")
+    public Iterable<Movie> selectActor(String actors);
+
+    @Query("{'directors': {'$regex' : '?0' , '$options' : 'm'}}")
+    public Iterable<Movie> selectDirector(String director);
 }

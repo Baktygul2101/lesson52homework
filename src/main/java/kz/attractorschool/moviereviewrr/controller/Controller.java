@@ -122,4 +122,13 @@ public class Controller {
     public List<Review> getUserRev(@PathVariable("name") User name) {
         return rr.findByReviewerAndId(name);
     }*/
+
+    @GetMapping("/moviedirector/{directors}")
+    public Iterable<Movie> selectDirector(@PathVariable("directors") String directors){
+        return mr.selectDirector(directors);
+    }
+    @GetMapping("/movieactors/{actors}")
+    public Iterable<Movie> selectActors(@PathVariable("actors") String actors){
+        return mr.selectActor(actors);
+    }
 }
